@@ -29,7 +29,7 @@ module Sunspot
     # * remove_all! with an argument
     #
     class ShardingSessionProxy < AbstractSessionProxy
-      not_supported :batch, :config, :remove_by_id, :remove_by_id!
+      not_supported :batch, :config, :remove_by_id, :remove_by_ids, :remove_by_id!
 
       # 
       # +search_session+ is the session that should be used for searching.

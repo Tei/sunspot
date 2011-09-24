@@ -209,9 +209,9 @@ module Sunspot
     # Optimizes the index on the singletion session.
     #
     # Frequently adding and deleting documents to Solr, leaves the index in a
-    # fragmented state. The optimize command merges all index segments into 
-    # a single segment and removes any deleted documents, making it faster to 
-    # search. Since optimize rebuilds the index from scratch, it takes some 
+    # fragmented state. The optimize command merges all index segments into
+    # a single segment and removes any deleted documents, making it faster to
+    # search. Since optimize rebuilds the index from scratch, it takes some
     # time and requires double the space on the hard disk while it's rebuilding.
     # Note that optimize also commits.
     def optimize
@@ -414,7 +414,7 @@ module Sunspot
     # 
     # Remove an object from the index using its class name and primary key.
     # Useful if you know this information and want to remove an object without
-    # instantiating it from persistent storage
+    # instantiating it from persistent storage.
     #
     # ==== Parameters
     #
@@ -427,7 +427,27 @@ module Sunspot
       session.remove_by_id(clazz, id)
     end
 
-    # 
+    #
+    # Remove a number of objects of a certain class from the index using their class name and primary keys.
+    # Useful if you know this information and want to remove an object without
+    # instantiating it from persistent storage.
+    #
+    # ==== Parameters
+    #
+    # clazz<Class>:: Class of the object, or class name as a string or symbol
+    # id::
+    #   Primary keys of the object. This should be the same ids that would be
+    #   returned by the class's instance adapter.
+    #
+    # ==== Example (remove the documents with id 1, 2, and 3 from the SOLR index)
+    #
+    # Sunspot.remove_by_ids Post, 1, 2, 3
+    #
+    def remove_by_ids(clazz, *ids)
+      session.remove_by_ids(clazz, *ids)
+    end
+
+    #
     # Remove an object by class name and primary key, and immediately commit.
     # See #remove_by_id and #commit
     #
